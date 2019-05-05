@@ -1,0 +1,40 @@
+$top-offset: 15%;
+* {
+    box-sizing: border-box;
+  }
+
+body {
+    width: 100%;
+}
+.header {
+    height: $top-offset;
+    width: 100%;
+    position: absolute;
+    background-color: #EBA2A2;
+}
+
+.body-view {
+    top: $top-offset;
+    width: 100%;
+    position: absolute;
+}
+
+.row {
+    width: inherit;
+}
+
+.header-text {
+    top: 30%;
+    position: relative;
+    text-align: center;
+}
+
+.clients-view {
+    width: 25%;
+    background-color: #F9FCFC;
+    position: fixed;
+    height: 100%;
+    ul > li {
+        
+    } 
+}
