@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AddClient from './components/add-client';
-import ShowClients from './components/show-clients'
+import ListAllClients from './components/list-clients';
+import ClientInfo from './components/client-info';
 import Axios from 'axios';
 
 // Add name input
@@ -11,33 +12,46 @@ class App extends Component {
       longitude: undefined,
       latitude: undefined,
       floor: undefined,
-      default_client: '',
+      current_client: undefined,
       errors: {},
       clients: {},
       poi_name: ''
     }
     this.setValues = this.setValues.bind(this);
-    this.changeDefaultClient = this.changeDefaultClient.bind(this);
+    this.changeCurrentClient = this.changeCurrentClient.bind(this);
+    this.getAllClientNames = this.getAllClientNames.bind(this);
   }
 
   componentDidMount(){
     Axios.get('http://localhost:3001/clients')
     .then(res=>{
       if (res.status === 200 && res.data && res.data.result) {
-        const clients = res.data.result
-        this.setState({clients: clients, default_client: Object.keys(clients)[0] || ''});
+        const clients = res.data.result;
+        this.setState({clients: clients, current_client: Object.keys(clients)[0] || ''});
       }
     }, err=>{
       console.log(err);
     })
-    .finally(()=>{
-      this.setState({
-        longitude:'',
-        latitude: '',
-        floor: '',
-        poi_name: ''
-      })
-    })
+    // .finally(()=>{
+    //   this.setState({
+    //     longitude:'',
+    //     latitude: '',
+    //     floor: '',
+    //     poi_name: ''
+    //   })
+    // })
+  }
+
+  /**
+   * Returns an array of client names.
+   */
+  getAllClientNames(){
+    return Object.keys(this.state.clients);
+  }
+
+  getCurrentClientInfo(){
+    const current_client = this.state.current_client;
+    return this.state.clients[current_client] || {};
   }
 
   setValues(e){
@@ -57,8 +71,8 @@ class App extends Component {
     this.setState({[state_prop]: e.target.value, errors: error});
   }
 
-  changeDefaultClient(client_name){
-    this.setState({default_client: client_name});
+  changeCurrentClient(client_name){
+    this.setState({current_client: client_name});
   }
 
   submitPoi(){
@@ -78,21 +92,19 @@ class App extends Component {
       <div>
         <div className="header">
           <div className="header-text">
-            <h1>Harmony Intel Client Onboarding</h1>
+            <h4>Harmony Intel Client Onboarding</h4>
           </div>
         </div>
 
         <div className="body-view">
-          <div>
-            <div className="clients-view">
-              <div>
-                <h4>Client List</h4>
-              </div>
-              <ShowClients clientList={this.state.clients} default_client={this.state.default_client} changeDefaultClient={this.changeDefaultClient} />
-            </div>
+          <div className="clients-list">
             <div>
-
+              <h4>Client List</h4>
             </div>
+            <ListAllClients all_clients={this.getAllClientNames()} changeCurrentClient={this.changeCurrentClient} />
+          </div>
+          <div className="clients-view">
+            <ClientInfo current_client_info={this.getCurrentClientInfo()} />
           </div>
         </div>
       </div>
