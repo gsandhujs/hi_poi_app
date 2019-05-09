@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import EditCheckpoint from '../components/edit-checkpoint';
 
 const ClientInfo = (props) =>{
     return(
@@ -9,7 +10,7 @@ const ClientInfo = (props) =>{
                     <div key={Math.random()} className="client-info">
                         <div className="client-info-header">
                             <i className="fas fa-map-marker-alt poi-marker-icon margin-right-5"></i><span>{poi.poiName}</span>
-                            <i className="far fa-edit edit-icon"></i>
+                            <EditCheckpoint poi_data={poi}/>
                         </div>
                         <div className="client-info-body">
                             <div>

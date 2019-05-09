@@ -29,6 +29,41 @@ body {
     width: inherit;
 }
 
+.modal-app {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    &-content { 
+        position: absolute;
+        z-index: 1;
+        background-color: white;
+        top: 0;
+        left: 0;
+        margin: auto;
+        bottom: 0;
+        right: 0;
+        width: 50%;
+        height: 50%;
+    }
+    &-content > &-body {
+        position: relative;
+    }
+    &-content > &-header {
+        position: relative;
+        padding: 10px;
+        background: darkgrey;
+    }
+    &-header > .close-modal {
+        float: right;
+        padding-top: 3px;
+        cursor: pointer;
+    }
+}
+
+
 .header-text {
     top: 30%;
     position: relative;
@@ -60,7 +95,10 @@ body {
 
 .edit-icon {
     float: right;
-    margin-top: 4px;
+}
+
+.edit-icon:hover {
+    cursor: pointer;
 }
 
 .poi-marker-icon {
