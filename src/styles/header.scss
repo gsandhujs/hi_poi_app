@@ -1,4 +1,4 @@
-$top-offset: 15%;
+$top-offset: 8%;
 * {
     box-sizing: border-box;
   }
@@ -10,31 +10,135 @@ body {
     height: $top-offset;
     width: 100%;
     position: absolute;
-    background-color: #EBA2A2;
+    background-color: #082951;
 }
 
 .body-view {
     top: $top-offset;
     width: 100%;
     position: absolute;
+    display: inline-flex;
+    height: 100% - $top-offset;
+}
+
+.flex {
+    display: flex;
 }
 
 .row {
     width: inherit;
 }
 
+.modal-app {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    &-content { 
+        position: absolute;
+        z-index: 1;
+        background-color: white;
+        top: 0;
+        left: 0;
+        margin: auto;
+        bottom: 0;
+        right: 0;
+        width: 50%;
+        height: 50%;
+    }
+    &-content > &-body {
+        position: relative;
+    }
+    &-content > &-header {
+        position: relative;
+        padding: 10px;
+        background: darkgrey;
+    }
+    &-header > .close-modal {
+        float: right;
+        padding-top: 3px;
+        cursor: pointer;
+    }
+}
+
+
 .header-text {
     top: 30%;
     position: relative;
     text-align: center;
+    color: white;
+}
+
+%body-child-views {
+    position: relative;
+    margin: 10px 10px 10px 20px;
+    padding: 5px 5px 5px 10px; 
+    background-color: #F9FCFC;
+    box-shadow: 3px 4px 10px 3px #ced4da;
+}
+
+.clients-list {
+    @extend %body-child-views;
+    width: 20%;
+    ul > li {
+        text-align: center;
+        font-size: 1.6em;
+        cursor: pointer;
+        margin: 15px 0 15px 0;
+    }
+    ul > li:hover {
+        background-color: #ced4da;
+    }
+}
+
+.edit-icon {
+    float: right;
+}
+
+.edit-icon:hover {
+    cursor: pointer;
+}
+
+.poi-marker-icon {
+    color: #b22222;
 }
 
 .clients-view {
+    @extend %body-child-views;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.client-info {
+    margin: 10px;
     width: 25%;
-    background-color: #F9FCFC;
-    position: fixed;
-    height: 100%;
-    ul > li {
-        
-    } 
+    box-shadow: 3px 4px 10px 3px #ced4da;
+    &-body {
+        padding: 0 15px 15px 15px;
+    }
+    &-header {
+        text-align: center;
+        padding: 10px;
+        background: #ffe4c4;
+    }
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+$values: 0 2 5 10 15 20;
+$directions: top right bottom left;
+@each $direction in $directions {
+    @each $value in $values {
+        .margin-#{$direction}-#{$value}{
+            margin-#{$direction}: #{$value}px;
+        }
+    }
 }
