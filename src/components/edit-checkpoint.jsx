@@ -15,25 +15,25 @@ const EditCheckpoint = (props) => {
 const EditCheckpointForm = (props) =>{
     return (
         <div className="modal-app">
-            <div className="modal-app-content">
-                <div className="modal-app-header">
+            <div className="modal-content">
+                <div className="modal-header">
                     <i className="fas fa-times close-modal" onClick={()=>{props.toggleEdit(!props.is_edit)}}></i>
                     <span>{props.poi_data.poiName}</span>
                 </div>
-                <div className="modal-app-body">
+                <div className="modal-body">
                     <div className="margin-top-15">
                         <label htmlFor="poi_name"><strong>Point Of Interest Name: </strong></label>
                         <input value={props.poi_data.poiName} id="poi_name"/>
                     </div>
                     
                     <div className="margin-top-15">
-                        <label htmlFor="poi_name"><strong>Point Of Interest Name: </strong></label>
-                        <input value={props.poi_data.poiName} id="poi_name"/>
+                        <label htmlFor="latitude"><strong>Latitude: </strong></label>
+                        <input value={props.poi_data.latitude} id="latitude"/>
                     </div>
                     
                     <div className="margin-top-15">
-                        <label htmlFor="poi_name"><strong>Point Of Interest Name: </strong></label>
-                        <input value={props.poi_data.poiName} id="poi_name"/>
+                        <label htmlFor="longitude"><strong>Longitude: </strong></label>
+                        <input value={props.poi_data.longitude} id="longitude"/>
                     </div>
                 </div>
             </div>
